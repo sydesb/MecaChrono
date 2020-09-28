@@ -1,10 +1,10 @@
 # MecaChrono
 
-Video pointing tool for browsers
+## Video pointing tool for browsers
 
 Français :
 
-### H3 MecaChrono est une web application pour faire du pointage vidéo et de l'étude de mouvement.
+### MecaChrono est une web application pour faire du pointage vidéo et de l'étude de mouvement.
 Vous pouvez : 
 * obtenir les positions,
 * vitesses et accélérations puis récupérer les valeurs dans un tableau (csv, xlsx ou variable Python),
