@@ -10,7 +10,7 @@ Vous pouvez :
 * vitesses et accélérations puis récupérer les valeurs dans un tableau (csv, xlsx ou variable Python),
 * afficher des graphiques,
 
-Mais une des principales forces de MecaChrono reste cette possibilité :
+### Mais une des principales forces de MecaChrono reste cette possibilité :
 * vous pouvez configurer l'application pour qu'elle corresponde au travail que vous ferez avec vos élèves. Par exemple, uniquement un tableau de positions ou bien un calcul des accélérations.
 
 Plus d'information sur le site officiel : https://www.boreale.org/?mecachrono
