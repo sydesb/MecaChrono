@@ -15,6 +15,6 @@ Vous pouvez :
 
 Plus d'information sur le site officiel : https://www.boreale.org/?mecachrono
 
-LEs fichiers sources seront bientôt dispnilves mais je dois d'abord nettoyer certaines parties mises en commentaire.
+Les fichiers sources seront bientôt dispnilves mais je dois d'abord nettoyer certaines parties mises en commentaire.
 
 English
