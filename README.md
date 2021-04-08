@@ -15,6 +15,5 @@ Vous pouvez :
 
 Plus d'information sur le site officiel : https://www.boreale.org/?mecachrono
 
-Les fichiers sources seront bientôt dispnilves mais je dois d'abord nettoyer certaines parties mises en commentaire.
-
+Il manque ffmpeg dans lib car il est très lourd.
 English
