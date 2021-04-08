@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+  <body>
+  <p> Faites un clic droit sur l'image puis Copier+Coller ou Enregistrer l'image. Vous pourrez ensuite placer cette image dans un document, l'afficher avec un vidéoprojecteur ou la partager dans un ENT. Avec un iPad, il suffit d'utiliser l'appareil photo par défaut et viser le QR Code. </p>
+    <canvas id="qr"></canvas>
+
+    <script src="lib/qrious/qrious.min.js"></script>
+    <script>
+      (function() {
+	  if(window.location.href.indexOf("?")!=-1){
+		lesparam=window.location.href.substring(1+window.location.href.indexOf("?"));
+		bonurl=window.location.href.substring(0,(window.location.href.indexOf("qrcode.html?")))+"index.php?"+lesparam;
+        var qr = new QRious({
+          element: document.getElementById('qr'),
+          value: bonurl,
+		  mime: "image/png",
+		  level: 'M',
+		  padding: 25,
+		  size: 500
+        });
+		aze=qr.toDataURL();
+		var img = document.createElement('img');
+		img.src = aze;
+		document.body.appendChild(img);
+		document.getElementById("qr").style.display = 'none';
+		document.body.appendChild(document.createElement('p')); 
+		var una = document.createElement('a');
+	    var link = document.createTextNode(bonurl); 
+                una.appendChild(link);  
+				una.title = "Le Lien : "+bonurl;  
+                una.href = bonurl;  
+                document.body.appendChild(una);  
+		document.getElementById("qr").style.display = 'none';
+     } })();
+	  
+    </script>
+  </body>
+</html>
