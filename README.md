@@ -16,4 +16,7 @@ Vous pouvez :
 Plus d'information sur le site officiel : https://www.boreale.org/?mecachrono
 
 Il manque ffmpeg dans lib car il est très lourd.
+
+
+
 English
