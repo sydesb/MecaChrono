@@ -1,5 +1,7 @@
 var laliste = [],lalistetempsancien = [],isVideoPlaying = false;
 var nbimagesaut = 10,posxcsignanew = 0,posycsignanew = 0,tabledatatabulator = [],nbimageparsec = 50,definiechelleencours = false,echelledejadefinie = false,premierpointdefiniechelle = false,pointoriginechellex = 0,pointoriginechelley = 0,pointfinechellex = 1,pointfinechelley = 1,longueurechellereelle = 1,encourspinchcourbe = false,definiorigineencours = false,autorisationloupeconfig = true,videochargee = false,loupeaffiche = false,seekedokpourredraw = false,dejainitcanvas = false,contextgraph = [],cvgraph = [],pointoriginex = 0.03,pointoriginey = 0.97,configremiseazer = false,rayoncinit = 150,rayonc = rayoncinit,loinloupe = 2,zoom = 4,decalageloupex = 0,decalageloupey = -rayonc,afficheflechedynamique = -1,ilfautpasseralimagesuivante = false,firsttableau = true,sauvagardecanvasgraphique = [],echellex = [],echelley = [],unitey = [],unitex = [],arrayymin = [],arrayxmin = [],arrayymax = [],arrayxmax = [],contextdynamique = [],cvdynamique = [],petitesflechesdejaffichees = false,surbrillanceencours = false, pointoriginezoom, pointfinalzoom, lecvlorsduzoom, numpointbrillant = undefined,oldpointprillant = undefined,numcanvaszoomencours = undefined,lebonipourtablette = 0,intervalIDinfotime = 0,copiebooldernier = true,booleffacepoint = false,trouvepoint = false,numpointpoubell = -1,worker,margex = 0.10,margey = 0.15,largeurvw = 80,orientationrepere = 0,largeurcanvasgr = [],hauteurcanvasgr = [],lalargeurgraphique, lahauteurgraphique,fileURL, extensionaxexmaxencours = false, extensionaxexminencours = false,extensionaxeymaxencours = false,extensionaxeyminencours = false,calculxmin = 0,calculxmax = 0,calculymin = 0,calculymax = 0,calculvreelmin = 0,calculvreelmax = 0,calculamin = 0,calculamax = 0,identifianttime = 0, getA, getB = "",	getC, getD, getE,labelaxex,resolutiongraph = 2,maxdelta = 100000,mindelta = 0.0001, ongletencours = "acqui",intro,nomdelavideo, affichetooltip = false,	reglagezoomencours = false,touteslesvalue, lesvalueabscisse, lesmin, lesmax, loupevideobalise = true,brightness = 100,contrast = 100,saturate = 100,invert = 0,huerotate = 0,nbchiffreprecision = 6,nbimageparsecondedetecteeparffmpeg = -1,oldbrightness, oldcontrast, oldsaturate, oldinvert, oldhuerotate,essaienompropr = ["tremisazero", "xreel", "yreel", "vxreel", "vyreel", "vreel", "ax", "ay", "a", "Ec", "Ep", "Em"],jolinompropr = [lesphrasestraduites.tempsunite, lesphrasestraduites.xunite, lesphrasestraduites.yunite, lesphrasestraduites.vxunite, lesphrasestraduites.vyunite, lesphrasestraduites.vunite, lesphrasestraduites.axunite, lesphrasestraduites.ayunite, lesphrasestraduites.aunite, lesphrasestraduites.Ecunite, lesphrasestraduites.Epunite, lesphrasestraduites.Emunite],lesgrandeurs = [lesphrasestraduites.t, lesphrasestraduites.x, lesphrasestraduites.y, lesphrasestraduites.vx, lesphrasestraduites.vy, lesphrasestraduites.v, lesphrasestraduites.ax, lesphrasestraduites.ay, lesphrasestraduites.a, lesphrasestraduites.Ec, lesphrasestraduites.Ep, lesphrasestraduites.Em],lesunites = [lesphrasestraduites.s, lesphrasestraduites.m, lesphrasestraduites.m, lesphrasestraduites.ms, lesphrasestraduites.ms, lesphrasestraduites.ms, lesphrasestraduites.msm2, lesphrasestraduites.msm2, lesphrasestraduites.msm2, lesphrasestraduites.j, lesphrasestraduites.j, lesphrasestraduites.j],listecouleur = ['#2bf08f', '#82F0F5', '#90ee7e', '#f45b5b', '#7798BF', '#B682F5', '#ff0066', '#FF39E5', '#55BF3B', '#DF5353', '#7798BF', '#F03939'],x1touchfin, x2touchfin, y1touchfin, y2touchfin, ecartorigine, x1touch, x2touch, y1touch, y2touch, ecartnewx, ecartnewy, numdynamiquetablette,detectpinch = false,vid, cv, context, rect, letempsici, ilfautinitialisertouteslesvariables = true;
+ilfautinitialisertouteslesvariables = true;
+let taketime=0;
 
 function initvariable() {
 	echelledejadefinie = false;
@@ -164,6 +166,23 @@ function initvarcanvasvideo() {
 			vidloupe.currentTime = vid.currentTime;
 		}
 	});
+	
+	progress.addEventListener("touchmove", function(e) {
+		e.preventDefault();
+		var touches = e.targetTouches;
+		if (touches.length == 1)  {	
+			if (isVideoPlaying) vid.pause();
+			var pos = ( touches[0].pageX  - (this.offsetLeft + this.offsetParent.offsetLeft)) / this.offsetWidth;
+			seekedokpourredraw = false;
+			vid.currentTime = pos * vid.duration;
+			if (loupevideobalise) {
+				vidloupe.currentTime = vid.currentTime;
+				}
+		
+			}
+		});
+	
+	
 	resize_canvas(vid);
 	vid.addEventListener("seeked", function(e) {
 		seekedokpourredraw = true;
@@ -731,24 +750,30 @@ function croixhoriz(x, y, epaisseur, couleur) {
 	context.restore();
 }
 
-function unecroix(x, y) {
+function unecroix(x, y,position,total) {
+	if (getE[5] == "1"){				
+		intensite=1;
+		intensite=intensite-(total-position)*0.1;
+		if(intensite<0.2) intensite=0.2;
+		}
+		else intensite=1;
 	context.save();
 	context.beginPath();
 	context.lineWidth = 2;
-	context.strokeStyle = 'rgba(255,255,255,0.8)';
+	context.strokeStyle = 'rgba(255,255,255,'+0.8*intensite+')';
 	context.arc(x, y, 2, 0, 6.283);
 	context.stroke();
 	context.restore();
 	context.save();
 	context.beginPath();
-	context.strokeStyle = 'rgba(255,100,100,1)';
+	context.strokeStyle = 'rgba(255,100,100,'+intensite+')';
 	context.lineWidth = 3;
 	context.arc(x, y, 4, 0, 6.283);
 	context.stroke();
 	context.restore();
 	context.save();
 	context.beginPath();
-	context.strokeStyle = 'rgba(255,255,255,1)';
+	context.strokeStyle = 'rgba(255,255,255,'+intensite+')';
 	context.lineWidth = 1;
 	context.arc(x, y, 6, 0, 6.283);
 	context.stroke();
@@ -872,6 +897,24 @@ function traceviseur(lex, ley) {
 	context.stroke();
 	context.restore();
 }
+function effacecentre(){
+	context.save();
+	rayoncentre=30;
+	context.beginPath();
+	context.globalCompositeOperation = 'destination-out';
+	deltatimealpha=Math.round(performance.now())-taketime;
+	deltatimealpha=deltatimealpha/800;
+	if(deltatimealpha>1) deltatimealpha=1;
+	if(deltatimealpha<0) deltatimealpha=0;
+	var radgrad = context.createRadialGradient(posxcsignanew,posycsignanew,0,posxcsignanew,posycsignanew,rayoncentre);
+	radgrad.addColorStop(0, 'rgba(255,0,0,'+deltatimealpha*0.8+')');
+	radgrad.addColorStop(0.6, 'rgba(255,0,0,'+deltatimealpha*0.6+')');
+	radgrad.addColorStop(1, 'rgba(255,0,0,0)');
+	context.fillStyle = radgrad;
+	context.arc(posxcsignanew, posycsignanew, rayoncentre, 0, Math.PI*2);
+	context.fill();
+	context.restore();
+}
 
 function loupe() {
 	vidpourloupe = document.getElementById("monfilm");
@@ -944,6 +987,7 @@ function loupe() {
 				}
 			}
 		}
+		if (getE[6] == "1") if(!booleffacepoint)effacecentre();
 		traceechelle();
 		tracerepere();
 		if (decalageactif) traceviseur(posxcsignanew, posycsignanew);
@@ -1016,6 +1060,7 @@ function handleStartvideo(evt) {
 											time: vid.currentTime,
 											numframe: vid.currentTime * nbimageparsec
 										};
+										taketime=performance.now();	
 										sortie = true;
 									}
 								}
@@ -1029,6 +1074,7 @@ function handleStartvideo(evt) {
 								time: vid.currentTime,
 								numframe: vid.currentTime * nbimageparsec
 							});
+							taketime=performance.now();	
 							lebonipourtablette = laliste.length - 1;
 						}
 						laliste.sort(function(a, b) {
@@ -1110,12 +1156,14 @@ function handleMovevideo(evt) {
 						sortie = false;
 						i = 0;
 						trouvememetemps = false;
-						if (laliste.length > 0) laliste[lebonipourtablette] = {
-							x: x / vid.offsetWidth,
-							y: y / vid.offsetWidth,
-							time: vid.currentTime,
-							numframe: vid.currentTime * nbimageparsec
-						};
+						if (laliste.length > 0) {laliste[lebonipourtablette] = {
+											x: x / vid.offsetWidth,
+											y: y / vid.offsetWidth,
+											time: vid.currentTime,
+											numframe: vid.currentTime * nbimageparsec
+										};
+									 taketime=performance.now();	
+									}
 					} else if (booleffacepoint) {
 						xpoubelle = x / vid.offsetWidth;
 						ypoubelle = y / vid.offsetWidth;
@@ -1209,12 +1257,14 @@ function handleEndvideo(evt) {
 					sortie = false;
 					i = 0;
 					trouvememetemps = false;
-					if (laliste.length > 0) laliste[lebonipourtablette] = {
-						x: x / vid.offsetWidth,
-						y: y / vid.offsetWidth,
-						time: vid.currentTime,
-						numframe: vid.currentTime * nbimageparsec
-					};
+					if (laliste.length > 0) {laliste[lebonipourtablette] = {
+									x: x / vid.offsetWidth,
+									y: y / vid.offsetWidth,
+									time: vid.currentTime,
+									numframe: vid.currentTime * nbimageparsec
+									};
+								 taketime=performance.now();	
+								}
 					ilfautpasseralimagesuivante = true;
 				} else if (booleffacepoint) {
 					xpoubelle = x / vid.offsetWidth;
@@ -1383,6 +1433,7 @@ function redraw() {
 			}
 		}
 		drawSplines();
+		if (getE[6] == "1")if(!booleffacepoint)effacecentre();
 		traceechelle();
 		tracerepere();
 		isIpad();
