@@ -634,6 +634,18 @@ else
                         <?= $MC_TRAD_configt0 ?>
                    </label>
                 </div>
+                <div class="lecheck">
+                    <input type="checkbox" class="uiswitch custom" id="pointstransparents">  
+                    <label for="pointstransparents" class="labelcheck">
+                        <?=$MC_TRAD_pointstransparents?>
+                    </label>
+                </div>
+		        <div class="lecheck">
+                    <input type="checkbox" class="uiswitch custom" id="dernierspointsmasques"> 
+                    <label for="dernierspointsmasques" class="labelcheck">
+                        <?=$MC_TRAD_effacedernierspoints?>
+                    </label>
+                </div>
             </div>
         </div>
         <p>
