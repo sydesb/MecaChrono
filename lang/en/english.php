@@ -144,13 +144,8 @@ $MC_TRAD_captureecrantrajnoir="The trajectory with a black background";
 
 
 //beta 0.07 :
-$MC_TRAD_pointstransparents="The points become transparent so as not to interfere with a pointing that is near an old point.";
+$MC_TRAD_pointstransparents="Comet effect: only the most recent points are clearly visible, the others are translucent.";
 $MC_TRAD_effacedernierspoints="Do not display points around the pointer. Convenient in the event of a pendulum so as not to be hampered during U-turns.";
-
-
-
-
-
 
 
 
