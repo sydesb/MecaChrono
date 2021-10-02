@@ -135,7 +135,7 @@ $MC_TRAD_captureecrantrajnoir="La trajectoire avec un fond noir";
 
 
 //beta 0.07 :
-$MC_TRAD_pointstransparents="Les points deviennent transparents pour ne pas gêner un pointage qui se trouve près d'un ancien point.";
+$MC_TRAD_pointstransparents="Effet comète : seuls les points les plus récents sont bien visibles, les autres sont translucides.";
 $MC_TRAD_effacedernierspoints="Ne pas afficher les points autour du pointeur. Pratique en cas de pendule pour ne pas être gêner lors des demi-tours.";
 
 
