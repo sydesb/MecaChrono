@@ -1,5 +1,5 @@
 var laliste = [],lalistetempsancien = [],isVideoPlaying = false;
-var nbimagesaut = 10,posxcsignanew = 0,posycsignanew = 0,tabledatatabulator = [],nbimageparsec = 50,definiechelleencours = false,echelledejadefinie = false,premierpointdefiniechelle = false,pointoriginechellex = 0,pointoriginechelley = 0,pointfinechellex = 1,pointfinechelley = 1,longueurechellereelle = 1,encourspinchcourbe = false,definiorigineencours = false,autorisationloupeconfig = true,videochargee = false,loupeaffiche = false,seekedokpourredraw = false,dejainitcanvas = false,contextgraph = [],cvgraph = [],pointoriginex = 0.03,pointoriginey = 0.97,configremiseazer = false,rayoncinit = 150,rayonc = rayoncinit,loinloupe = 2,zoom = 4,decalageloupex = 0,decalageloupey = -rayonc,afficheflechedynamique = -1,ilfautpasseralimagesuivante = false,firsttableau = true,sauvagardecanvasgraphique = [],echellex = [],echelley = [],unitey = [],unitex = [],arrayymin = [],arrayxmin = [],arrayymax = [],arrayxmax = [],contextdynamique = [],cvdynamique = [],petitesflechesdejaffichees = false,surbrillanceencours = false, pointoriginezoom, pointfinalzoom, lecvlorsduzoom, numpointbrillant = undefined,oldpointprillant = undefined,numcanvaszoomencours = undefined,lebonipourtablette = 0,intervalIDinfotime = 0,copiebooldernier = true,booleffacepoint = false,trouvepoint = false,numpointpoubell = -1,worker,margex = 0.10,margey = 0.15,largeurvw = 80,orientationrepere = 0,largeurcanvasgr = [],hauteurcanvasgr = [],lalargeurgraphique, lahauteurgraphique,fileURL, extensionaxexmaxencours = false, extensionaxexminencours = false,extensionaxeymaxencours = false,extensionaxeyminencours = false,calculxmin = 0,calculxmax = 0,calculymin = 0,calculymax = 0,calculvreelmin = 0,calculvreelmax = 0,calculamin = 0,calculamax = 0,identifianttime = 0, getA, getB = "",	getC, getD, getE,labelaxex,resolutiongraph = 2,maxdelta = 100000,mindelta = 0.0001, ongletencours = "acqui",intro,nomdelavideo, affichetooltip = false,	reglagezoomencours = false,touteslesvalue, lesvalueabscisse, lesmin, lesmax, loupevideobalise = true,brightness = 100,contrast = 100,saturate = 100,invert = 0,huerotate = 0,nbchiffreprecision = 6,nbimageparsecondedetecteeparffmpeg = -1,oldbrightness, oldcontrast, oldsaturate, oldinvert, oldhuerotate,essaienompropr = ["tremisazero", "xreel", "yreel", "vxreel", "vyreel", "vreel", "ax", "ay", "a", "Ec", "Ep", "Em"],jolinompropr = [lesphrasestraduites.tempsunite, lesphrasestraduites.xunite, lesphrasestraduites.yunite, lesphrasestraduites.vxunite, lesphrasestraduites.vyunite, lesphrasestraduites.vunite, lesphrasestraduites.axunite, lesphrasestraduites.ayunite, lesphrasestraduites.aunite, lesphrasestraduites.Ecunite, lesphrasestraduites.Epunite, lesphrasestraduites.Emunite],lesgrandeurs = [lesphrasestraduites.t, lesphrasestraduites.x, lesphrasestraduites.y, lesphrasestraduites.vx, lesphrasestraduites.vy, lesphrasestraduites.v, lesphrasestraduites.ax, lesphrasestraduites.ay, lesphrasestraduites.a, lesphrasestraduites.Ec, lesphrasestraduites.Ep, lesphrasestraduites.Em],lesunites = [lesphrasestraduites.s, lesphrasestraduites.m, lesphrasestraduites.m, lesphrasestraduites.ms, lesphrasestraduites.ms, lesphrasestraduites.ms, lesphrasestraduites.msm2, lesphrasestraduites.msm2, lesphrasestraduites.msm2, lesphrasestraduites.j, lesphrasestraduites.j, lesphrasestraduites.j],listecouleur = ['#2bf08f', '#82F0F5', '#90ee7e', '#f45b5b', '#7798BF', '#B682F5', '#ff0066', '#FF39E5', '#55BF3B', '#DF5353', '#7798BF', '#F03939'],x1touchfin, x2touchfin, y1touchfin, y2touchfin, ecartorigine, x1touch, x2touch, y1touch, y2touch, ecartnewx, ecartnewy, numdynamiquetablette,detectpinch = false,vid, cv, context, rect, letempsici, ilfautinitialisertouteslesvariables = true;
+var nbimagesaut = 10,posxcsignanew = 0,posycsignanew = 0,tabledatatabulator = [],nbimageparsec = 50,definiechelleencours = false,nbdoigtmaxechelle=0,echelledejadefinie = false,premierpointdefiniechelle = false,pointoriginechellex = 0,pointoriginechelley = 0,pointfinechellex = 1,pointfinechelley = 1,longueurechellereelle = 1,encourspinchcourbe = false,definiorigineencours = false,autorisationloupeconfig = true,videochargee = false,loupeaffiche = false,seekedokpourredraw = false,dejainitcanvas = false,contextgraph = [],cvgraph = [],pointoriginex = 0.03,pointoriginey = 0.97,configremiseazer = false,rayoncinit = 150,rayonc = rayoncinit,loinloupe = 2,zoom = 4,decalageloupex = 0,decalageloupey = -rayonc,afficheflechedynamique = -1,ilfautpasseralimagesuivante = false,firsttableau = true,sauvagardecanvasgraphique = [],echellex = [],echelley = [],unitey = [],unitex = [],arrayymin = [],arrayxmin = [],arrayymax = [],arrayxmax = [],contextdynamique = [],cvdynamique = [],petitesflechesdejaffichees = false,surbrillanceencours = false, pointoriginezoom, pointfinalzoom, lecvlorsduzoom, numpointbrillant = undefined,oldpointprillant = undefined,numcanvaszoomencours = undefined,lebonipourtablette = 0,intervalIDinfotime = 0,copiebooldernier = true,booleffacepoint = false,trouvepoint = false,numpointpoubell = -1,worker,margex = 0.10,margey = 0.15,largeurvw = 80,orientationrepere = 0,largeurcanvasgr = [],hauteurcanvasgr = [],lalargeurgraphique, lahauteurgraphique,fileURL, extensionaxexmaxencours = false, extensionaxexminencours = false,extensionaxeymaxencours = false,extensionaxeyminencours = false,calculxmin = 0,calculxmax = 0,calculymin = 0,calculymax = 0,calculvreelmin = 0,calculvreelmax = 0,calculamin = 0,calculamax = 0,identifianttime = 0, getA, getB = "",	getC, getD, getE,labelaxex,resolutiongraph = 2,maxdelta = 100000,mindelta = 0.0001, ongletencours = "acqui",intro,nomdelavideo, affichetooltip = false,	reglagezoomencours = false,touteslesvalue, lesvalueabscisse, lesmin, lesmax, loupevideobalise = true,brightness = 100,contrast = 100,saturate = 100,invert = 0,huerotate = 0,nbchiffreprecision = 6,nbimageparsecondedetecteeparffmpeg = -1,oldbrightness, oldcontrast, oldsaturate, oldinvert, oldhuerotate,essaienompropr = ["tremisazero", "xreel", "yreel", "vxreel", "vyreel", "vreel", "ax", "ay", "a", "Ec", "Ep", "Em"],jolinompropr = [lesphrasestraduites.tempsunite, lesphrasestraduites.xunite, lesphrasestraduites.yunite, lesphrasestraduites.vxunite, lesphrasestraduites.vyunite, lesphrasestraduites.vunite, lesphrasestraduites.axunite, lesphrasestraduites.ayunite, lesphrasestraduites.aunite, lesphrasestraduites.Ecunite, lesphrasestraduites.Epunite, lesphrasestraduites.Emunite],lesgrandeurs = [lesphrasestraduites.t, lesphrasestraduites.x, lesphrasestraduites.y, lesphrasestraduites.vx, lesphrasestraduites.vy, lesphrasestraduites.v, lesphrasestraduites.ax, lesphrasestraduites.ay, lesphrasestraduites.a, lesphrasestraduites.Ec, lesphrasestraduites.Ep, lesphrasestraduites.Em],lesunites = [lesphrasestraduites.s, lesphrasestraduites.m, lesphrasestraduites.m, lesphrasestraduites.ms, lesphrasestraduites.ms, lesphrasestraduites.ms, lesphrasestraduites.msm2, lesphrasestraduites.msm2, lesphrasestraduites.msm2, lesphrasestraduites.j, lesphrasestraduites.j, lesphrasestraduites.j],listecouleur = ['#2bf08f', '#82F0F5', '#90ee7e', '#f45b5b', '#7798BF', '#B682F5', '#ff0066', '#FF39E5', '#55BF3B', '#DF5353', '#7798BF', '#F03939'],x1touchfin, x2touchfin, y1touchfin, y2touchfin, ecartorigine, x1touch, x2touch, y1touch, y2touch, ecartnewx, ecartnewy, numdynamiquetablette,detectpinch = false,vid, cv, context, rect, letempsici, ilfautinitialisertouteslesvariables = true;
 ilfautinitialisertouteslesvariables = true;
 let taketime=0;
 
@@ -158,6 +158,7 @@ function initvarcanvasvideo() {
 		infotime.innerHTML = (letempp) + " s";
 	}, 100);
 	progress.addEventListener('click', function(e) {
+		e.preventDefault();//console.log("click");
 		if (isVideoPlaying) vid.pause();
 		var pos = (e.pageX - (this.offsetLeft + this.offsetParent.offsetLeft)) / this.offsetWidth;
 		seekedokpourredraw = false;
@@ -227,18 +228,22 @@ function initvarcanvasvideo() {
 											time: vid.currentTime,
 											numframe: vid.currentTime * nbimageparsec
 										};
+										taketime=performance.now();		
 										sortie = true;
 									}
 								}
 								i = i + 1;
 								if (i == laliste.length) sortie = true;
 							}
-						if (!trouvememetemps) laliste.push({
+						if (!trouvememetemps){ laliste.push({
 							x: x / vid.offsetWidth,
 							y: y / vid.offsetWidth,
 							time: vid.currentTime,
 							numframe: vid.currentTime * nbimageparsec
 						});
+						taketime=performance.now();		
+						
+						}
 						laliste.sort(function(a, b) {
 							return ((a.time < b.time) ? -1 : ((a.time == b.time) ? 0 : 1));
 						});
@@ -981,7 +986,7 @@ function loupe() {
 		for (i = 0; i < laliste.length; i++) {
 			if (letempsila >= laliste[i].time) {
 				if (((laliste[i].time - letempsila) < frameTime / 2) && ((letempsila - laliste[i].time) <= frameTime / 2)) unecroixbl(laliste[i].x * vidpourloupe.offsetWidth, laliste[i].y * vidpourloupe.offsetWidth);
-				else unecroix(laliste[i].x * vidpourloupe.offsetWidth, laliste[i].y * vidpourloupe.offsetWidth);
+				else unecroix(laliste[i].x * vidpourloupe.offsetWidth, laliste[i].y * vidpourloupe.offsetWidth,i,laliste.length);
 				if ((trouvepoint) && (booleffacepoint) && (numpointpoubell == i)) {
 					unecroixpoubelle(laliste[numpointpoubell].x * vid.offsetWidth, laliste[numpointpoubell].y * vid.offsetWidth);
 				}
@@ -1029,6 +1034,10 @@ function handleStartvideo(evt) {
 				}
 				pointoriginechellex = x / vid.offsetWidth;
 				pointoriginechelley = y / vid.offsetWidth;
+				
+				pointfinechellex=pointoriginechellex;
+				pointfinechelley=pointoriginechelley;
+				
 				posxcsignanew = x;
 				posycsignanew = y;
 			} else
@@ -1162,7 +1171,7 @@ function handleMovevideo(evt) {
 											time: vid.currentTime,
 											numframe: vid.currentTime * nbimageparsec
 										};
-									 taketime=performance.now();	
+									// taketime=performance.now();	
 									}
 					} else if (booleffacepoint) {
 						xpoubelle = x / vid.offsetWidth;
@@ -1233,7 +1242,7 @@ function handleEndvideo(evt) {
 						pointoriginechelley = (touches[i].pageY - (rect.top - bodyRect.top)) / vid.offsetWidth;
 					} else {
 						posxcsignanew = touches[i].pageX - (rect.left - bodyRect.left);
-						touches[i].pageY - (rect.top - bodyRect.top);
+						posycsignanew = touches[i].pageY - (rect.top - bodyRect.top);
 						pointfinechellex = posxcsignanew / vid.offsetWidth;
 						pointfinechelley = posycsignanew / vid.offsetWidth;
 					}
@@ -1404,10 +1413,15 @@ function redraw() {
 		lalistetempsancien = [];
 		tempsdepasse = false;
 		letempsila = vid.currentTime;
+		dernieri=laliste.length;
+		for (i = 0; i < laliste.length; i++) {
+					if(letempsila >=laliste[i].time) dernieri=i; else break;//recherche du dernier i qui est affiché
+					
+					}	
 		for (i = 0; i < laliste.length; i++) {
 			if (letempsila >= laliste[i].time) {
 				if (((laliste[i].time - letempsila) < frameTime / 2) && ((letempsila - laliste[i].time) <= frameTime / 2)) unecroixbl(laliste[i].x * vid.offsetWidth, laliste[i].y * vid.offsetWidth);
-				else unecroix(laliste[i].x * vid.offsetWidth, laliste[i].y * vid.offsetWidth);
+				else unecroix(laliste[i].x * vid.offsetWidth, laliste[i].y * vid.offsetWidth,i,dernieri);
 				if ((trouvepoint) && (booleffacepoint) && (numpointpoubell == i)) {
 					unecroixpoubelle(laliste[numpointpoubell].x * vid.offsetWidth, laliste[numpointpoubell].y * vid.offsetWidth);
 				}
@@ -2723,7 +2737,7 @@ function inittaillevideo() {
 	document.getElementById("monfilm").style.cssText += ';width:' + largeurvw + 'vw !important;';
 	document.getElementById("videoCont").style.cssText += ';width:' + largeurvw + 'vw !important;';
 	margevw = (100 - 20 - largeurvw) / 2;
-	document.getElementById("videoCont").style.margin = "12px " + margevw + "vw 6px " + margevw + "vw";
+	document.getElementById("videoCont").style.margin = "20px " + margevw + "vw 6px " + margevw + "vw";
 	rayonc = (Math.min(vid.offsetWidth, vid.offsetHeight)) / 4;
 	document.getElementById("divloupecapsule").style.cssText += ';width:' + 2 * rayonc + 'px !important;height:' + 2 * rayonc + 'px !important;';
 	document.getElementById('loupemoinsgauche').style.cssText += ";left:" + (cv.getBoundingClientRect().left - document.getElementById('moncontainer').getBoundingClientRect().left - 25) + "px;";
@@ -3346,6 +3360,12 @@ function initcheck() {
 				break;
 			case 4:
 				document.getElementById("ckremett0").checked = true;
+				break;
+			case 5:
+				document.getElementById("pointstransparents").checked = true;
+				break;
+			case 6:
+				document.getElementById("dernierspointsmasques").checked = true;
 				break;
 		}
 	}
